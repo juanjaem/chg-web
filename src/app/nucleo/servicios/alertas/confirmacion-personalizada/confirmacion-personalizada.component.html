@@ -1,0 +1,24 @@
+<div class="confirmacion-personalizada">
+  <div class="confirmacion-personalizada__titulo" mat-dialog-title>
+    <h3>{{ data.titulo }}</h3>
+    <button mat-button [mat-dialog-close]="false">
+      <fa-icon [icon]="['fas', 'times']" alt="Cerrar"></fa-icon>
+    </button>
+  </div>
+
+  <mat-dialog-content class="confirmacion-personalizada__cuerpo" mat-dialog-content cdkFocusInitial>
+    <p>{{ data.cuerpo }}</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions class="confirmacion-personalizada__botones">
+    <app-btn-junta-estandar
+      textoBtn="CANCELAR"
+      tipoBtn="secundario"
+      colorBtn="principal"
+      *ngIf="!data.noMostrarCancelar"
+      [mat-dialog-close]="false"
+    ></app-btn-junta-estandar>
+
+    <app-btn-junta-estandar textoBtn="ACEPTAR" tipoBtn="primario" colorBtn="principal" [mat-dialog-close]="true"></app-btn-junta-estandar>
+  </mat-dialog-actions>
+</div>
