@@ -1,0 +1,114 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Paleta principal.
+$paleta-principal: (
+  50: #d6f0ca,
+  100: var(--apoyo),
+  200: #9edc85,
+  300: #87d46a,
+  400: #71cc4f,
+  500: #63bc47,
+  600: #4ea73c,
+  700: #3a9333,
+  800: var(--principal),
+  900: var(--hover),
+  contrast: (
+    50: var(--txt-principal),
+    100: var(--txt-principal),
+    200: var(--txt-principal),
+    300: var(--txt-principal),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  ),
+);
+
+// Esta paleta realmente no se usará.
+$paleta-secundaria: (
+  50:#e4f7fd,
+  100: #bbecf9,
+  200: #92e0f4,
+  300: #6fd3ed,
+  400: #5ec9e5,
+  500: var(--informacion),
+  600: #54afca,
+  700: #4b9ab0,
+  800: #448697,
+  900: #37636b,
+  contrast: (
+    50: var(--txt-principal),
+    100: var(--txt-principal),
+    200: var(--txt-principal),
+    300: var(--txt-principal),
+    400: var(--txt-principal),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  ),
+);
+
+// Paleta de error
+$paleta-error: (
+  50: #fbeaed,
+  100: #f6cbcf,
+  200: #e19897,
+  300: #d27170,
+  400: var(--error),
+  500: #db4537,
+  600: #cd3d36,
+  700: #bb3430,
+  800: #ae2e29,
+  900: #a0241e,
+  contrast: (
+    50: var(--txt-principal),
+    100: var(--txt-principal),
+    200: var(--txt-principal),
+    300: var(--txt-principal),
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white
+  ),
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$junta-primary: mat.define-palette($paleta-principal, 800, 900, 100);
+$junta-accent: mat.define-palette($paleta-secundaria, 500, 700, 300);
+
+// The warn palette is optional (defaults to red).
+$junta-warn: mat.define-palette($paleta-error, 400, 600, 200);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$junta-theme: mat.define-light-theme((
+  color: (
+    primary: $junta-primary,
+    accent: $junta-accent,
+    warn: $junta-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($junta-theme);
+
+
+

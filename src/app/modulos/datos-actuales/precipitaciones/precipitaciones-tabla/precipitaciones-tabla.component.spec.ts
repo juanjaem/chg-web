@@ -8,9 +8,8 @@ describe('PrecipitacionesTablaComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PrecipitacionesTablaComponent ]
-    })
-    .compileComponents();
+      declarations: [PrecipitacionesTablaComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

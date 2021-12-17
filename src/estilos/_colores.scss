@@ -1,0 +1,25 @@
+// Se define los colores especificados en el documento de estilos de la Junta
+
+:root {
+  // Los COLORES PRINCIPALES surgen de la identidad corporativa de la Junta de Andalucía.
+  // Esta paleta está pensada para que combine fácilmente y no haya problemas de accesibilidad web.
+  --fondo: #ffffff;
+  --apoyo-especifico: #f7fbf8;
+  --apoyo: #c4ddca;
+  --principal: #087021;
+  --hover: #0b4c1a;
+
+  // La ESCALA DE GRISES sirve de recurso gráfico para jerarquizar los contenidos del sistema, separar
+  // elementos, agrupar elementos, etc.
+  --txt-principal: #333333;
+  --txt-apoyo: #bebebe;
+  --txt-apoyo-especifico: #f5f5f5;
+  --txt-contenedor: #eeeeee;
+
+  // Este tercer conjunto de colores nos permite establecer diferentes estados en la interacción del
+  // usuario con el sistema. ÉXITO, INFORMACIÓN, ADVERTENCIA Y ERROR.
+  --exito: #2ABC67;
+  --informacion: #5BC0DE;
+  --advertencia: #F0AD4E;
+  --error: #D9534F;
+}

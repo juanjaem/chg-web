@@ -5,10 +5,10 @@ import { Component } from '@angular/core';
   templateUrl: './precipitaciones-filtros.component.html',
   styleUrls: ['./precipitaciones-filtros.component.scss']
 })
-export class PrecipitacionesFiltrosComponent  {
+export class PrecipitacionesFiltrosComponent {
   provinciasLista: string[] = ['Jaén', 'Cordoba', 'Granada'];
 
-  constructor() { }
+  constructor() {}
 
   filtrarProvincia(e: string[]) {
     console.log('filtrar provincia');

@@ -10,8 +10,5 @@ export class PrecipitacionesTablaComponent {
 
   displayedColumns: string[] = ['nombrePunto', 'horaActual', 'ultimas12horas', 'acumuladoHoy', 'acumuladoAyer'];
 
-  constructor() { }
-
-
-
+  constructor() {}
 }
