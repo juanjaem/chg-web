@@ -1,0 +1,20 @@
+<h2>FILTROS</h2>
+
+<div>Provincias</div>
+<mat-form-field appearance="fill">
+  <mat-label>PROVINCIAS</mat-label>
+  <mat-select multiple (valueChange)="filtrarProvincia($event)">
+    <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia">{{ provincia }}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div>Estaciones meteorológicas</div>
+<mat-form-field appearance="fill">
+  <mat-label>PROVINCIAS</mat-label>
+  <mat-select multiple (valueChange)="filtrarProvincia($event)">
+    <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia">{{ provincia }}</mat-option>
+  </mat-select>
+</mat-form-field>
+<section class="example-section">
+  <mat-checkbox class="example-margin">Aplicar filtro</mat-checkbox>
+</section>

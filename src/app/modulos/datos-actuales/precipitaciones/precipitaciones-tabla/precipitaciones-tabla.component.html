@@ -1,0 +1,32 @@
+<table mat-table [dataSource]="datos" class="mat-elevation-z8">
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <ng-container matColumnDef="nombrePunto">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let element">{{ element.nombrePunto }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="horaActual">
+    <th mat-header-cell *matHeaderCellDef>Hora actual</th>
+    <td mat-cell *matCellDef="let element">{{ element.horaActual }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="ultimas12horas">
+    <th mat-header-cell *matHeaderCellDef>Ultimas 12h</th>
+    <td mat-cell *matCellDef="let element">{{ element.ultimas12horas }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="acumuladoHoy">
+    <th mat-header-cell *matHeaderCellDef>Acumulado hoy</th>
+    <td mat-cell *matCellDef="let element">{{ element.acumuladoHoy }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="acumuladoAyer">
+    <th mat-header-cell *matHeaderCellDef>Acumulado ayer</th>
+    <td mat-cell *matCellDef="let element">{{ element.acumuladoAyer }}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>

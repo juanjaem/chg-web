@@ -1,6 +1,16 @@
 import { environment } from './../../../../environments/environment';
 import { Component, OnInit } from '@angular/core';
 import { PeticionesService, PeticionOpciones } from './../../../nucleo/servicios/peticiones/peticiones.service';
+import { FormControl, FormGroup } from '@angular/forms';
+
+export interface TRPrecipitacion {
+  nombrePunto: string;
+  horaActual: string;
+  ultimas12horas: string;
+  acumuladoHoy: string;
+  acumuladoAyer: string;
+  unidad: string;
+}
 
 @Component({
   selector: 'app-precipitaciones',
@@ -8,7 +18,7 @@ import { PeticionesService, PeticionOpciones } from './../../../nucleo/servicios
   styleUrls: ['./precipitaciones.component.scss']
 })
 export class PrecipitacionesComponent implements OnInit {
-  datos: any;
+  datos: TRPrecipitacion[] = [];
 
   constructor(private peticionesService: PeticionesService) {}
 
@@ -20,11 +30,11 @@ export class PrecipitacionesComponent implements OnInit {
       mostrarAlertaError: false
     };
 
-    this.peticionesService.peticion(peticionesOpciones).subscribe((res: any) => {
-      console.log(res);
-      if (res?.body && res.body instanceof Object) {
-        this.datos = JSON.stringify(res.body['datos']);
+    this.peticionesService.peticion<TRPrecipitacion[]>(peticionesOpciones).subscribe((res) => {
+      if (res.body) {
+        this.datos = res.body;
       }
     });
   }
+
 }

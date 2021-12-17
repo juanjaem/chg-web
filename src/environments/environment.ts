@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'https://chguadalquivir.herokuapp.com'
+  url: 'http://localhost:3000'
+  // url: 'https://chguadalquivir.herokuapp.com'
 };
 
 /*
