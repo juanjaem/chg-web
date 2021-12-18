@@ -8,11 +8,11 @@
       <div class="prec-filtro__filtros__estaciones--filtro">
         <mat-form-field appearance="fill">
           <mat-label>ESTACIONES</mat-label>
-          <mat-select multiple (valueChange)="filtrarProvincia($event)">
+          <mat-select multiple (valueChange)="filtrarProvincia($event)" disabled="true">
             <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia">{{ provincia }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-slide-toggle></mat-slide-toggle>
+        <mat-slide-toggle disabled="true"></mat-slide-toggle>
       </div>
     </div>
 
@@ -23,10 +23,10 @@
         <mat-form-field appearance="fill">
           <mat-label>PROVINCIAS</mat-label>
           <mat-select multiple (valueChange)="filtrarProvincia($event)">
-            <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia">{{ provincia }}</mat-option>
+            <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia.codigo">{{ provincia.valor }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-slide-toggle></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="estadoFiltroProvincia" [checked]="true" (change)="activarDesactivarFiltroProvincia()"></mat-slide-toggle>
       </div>
     </div>
   </div>

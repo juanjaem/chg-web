@@ -18,7 +18,8 @@ export interface TRPrecipitacion {
   styleUrls: ['./precipitaciones.component.scss']
 })
 export class PrecipitacionesComponent implements OnInit {
-  datos: TRPrecipitacion[] = [];
+  datosOriginales: TRPrecipitacion[] = [];
+  datosFiltrados: TRPrecipitacion[] = [];
 
   constructor(private peticionesService: PeticionesService) {}
 
@@ -32,8 +33,13 @@ export class PrecipitacionesComponent implements OnInit {
 
     this.peticionesService.peticion<TRPrecipitacion[]>(peticionesOpciones).subscribe((res) => {
       if (res.body) {
-        this.datos = res.body;
+        this.datosOriginales = res.body;
+        this.datosFiltrados = res.body;
       }
     });
+  }
+
+  actualizarDatosFiltrados(datosFiltrados: TRPrecipitacion[]) {
+    this.datosFiltrados = datosFiltrados;
   }
 }
