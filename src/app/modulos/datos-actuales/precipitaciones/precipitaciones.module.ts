@@ -9,6 +9,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { PrecipitacionesTablaComponent } from './precipitaciones-tabla/precipitaciones-tabla.component';
 import { PrecipitacionesFiltrosComponent } from './precipitaciones-filtros/precipitaciones-filtros.component';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [PrecipitacionesTablaComponent, PrecipitacionesFiltrosComponent],
@@ -21,7 +22,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     FormsModule,
     ReactiveFormsModule,
     MatCheckboxModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatSortModule
   ],
   exports: [PrecipitacionesTablaComponent, PrecipitacionesFiltrosComponent]
 })

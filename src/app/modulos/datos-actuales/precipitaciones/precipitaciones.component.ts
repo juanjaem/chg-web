@@ -4,14 +4,18 @@ import { PeticionesService, PeticionOpciones } from './../../../nucleo/servicios
 import { DatosPluviometricosTr } from 'src/app/nucleo/interfaces/datos.models';
 import { GetDatosPluviometricosTrResp } from 'src/app/nucleo/interfaces/respuesta.models';
 
+export interface DatosPluviometricosTrExt extends DatosPluviometricosTr {
+  favorito?: boolean;
+}
+
 @Component({
   selector: 'app-precipitaciones',
   templateUrl: './precipitaciones.component.html',
   styleUrls: ['./precipitaciones.component.scss']
 })
 export class PrecipitacionesComponent implements OnInit {
-  datosOriginales: DatosPluviometricosTr[] = [];
-  datosFiltrados: DatosPluviometricosTr[] = [];
+  datosOriginales: DatosPluviometricosTrExt[] = [];
+  datosFiltrados: DatosPluviometricosTrExt[] = [];
 
   constructor(private peticionesService: PeticionesService) {}
 
@@ -31,7 +35,7 @@ export class PrecipitacionesComponent implements OnInit {
     });
   }
 
-  actualizarDatosFiltrados(datosFiltrados: DatosPluviometricosTr[]) {
+  actualizarDatosFiltrados(datosFiltrados: DatosPluviometricosTrExt[]) {
     this.datosFiltrados = datosFiltrados;
   }
 }

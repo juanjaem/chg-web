@@ -26,7 +26,7 @@
         <mat-form-field appearance="fill">
           <mat-label>PROVINCIAS</mat-label>
           <mat-select multiple (valueChange)="provinciasSeleccionadas = $event; filtrar()">
-            <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia.codigo">{{ provincia.valor }}</mat-option>
+            <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia.codigo">{{ provincia.valor }} ({{ provincia.codigo }})</mat-option>
           </mat-select>
         </mat-form-field>
         <mat-slide-toggle [(ngModel)]="provinciasSeleccionadasEstado" (change)="filtrar()"></mat-slide-toggle>

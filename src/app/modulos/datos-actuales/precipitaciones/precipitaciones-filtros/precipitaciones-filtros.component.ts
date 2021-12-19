@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DatosPluviometricosTr } from 'src/app/nucleo/interfaces/datos.models';
+import { DatosPluviometricosTrExt } from '../precipitaciones.component';
 
 @Component({
   selector: 'app-precipitaciones-filtros',
@@ -7,8 +7,8 @@ import { DatosPluviometricosTr } from 'src/app/nucleo/interfaces/datos.models';
   styleUrls: ['./precipitaciones-filtros.component.scss']
 })
 export class PrecipitacionesFiltrosComponent {
-  @Input() datosOriginales: DatosPluviometricosTr[] = [];
-  @Output() datosFiltrados = new EventEmitter<DatosPluviometricosTr[]>();
+  @Input() datosOriginales: DatosPluviometricosTrExt[] = [];
+  @Output() datosFiltrados = new EventEmitter<DatosPluviometricosTrExt[]>();
 
   provinciasSeleccionadasEstado: boolean = false;
   provinciasSeleccionadas: string[] = [];
@@ -30,7 +30,7 @@ export class PrecipitacionesFiltrosComponent {
   constructor() {}
 
   filtrar() {
-    let datosFiltrados: DatosPluviometricosTr[] = [...this.datosOriginales];
+    let datosFiltrados: DatosPluviometricosTrExt[] = [...this.datosOriginales];
 
     // FILTRO DE PROVINCIA
     if (this.provinciasSeleccionadasEstado) {
