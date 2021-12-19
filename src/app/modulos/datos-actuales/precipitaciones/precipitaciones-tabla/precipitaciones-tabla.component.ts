@@ -1,5 +1,5 @@
-import { DatosPluviometricos } from './../precipitaciones.component';
 import { Component, Input } from '@angular/core';
+import { DatosPluviometricosTr } from 'src/app/nucleo/interfaces/datos.models';
 
 @Component({
   selector: 'app-precipitaciones-tabla',
@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./precipitaciones-tabla.component.scss']
 })
 export class PrecipitacionesTablaComponent {
-  @Input() datos: DatosPluviometricos[] = [];
+  @Input() datos: DatosPluviometricosTr[] = [];
 
   displayedColumns: string[] = ['nombrePunto', 'horaActual', 'ultimas12horas', 'acumuladoHoy', 'acumuladoAyer'];
 

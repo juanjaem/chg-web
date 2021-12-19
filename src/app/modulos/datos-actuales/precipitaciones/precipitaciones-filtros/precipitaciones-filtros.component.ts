@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DatosPluviometricos } from '../precipitaciones.component';
+import { DatosPluviometricosTr } from 'src/app/nucleo/interfaces/datos.models';
 
 @Component({
   selector: 'app-precipitaciones-filtros',
@@ -7,8 +7,8 @@ import { DatosPluviometricos } from '../precipitaciones.component';
   styleUrls: ['./precipitaciones-filtros.component.scss']
 })
 export class PrecipitacionesFiltrosComponent {
-  @Input() datosOriginales: DatosPluviometricos[] = [];
-  @Output() datosFiltrados = new EventEmitter<DatosPluviometricos[]>();
+  @Input() datosOriginales: DatosPluviometricosTr[] = [];
+  @Output() datosFiltrados = new EventEmitter<DatosPluviometricosTr[]>();
 
   provinciasSeleccionadasEstado: boolean = false;
   provinciasSeleccionadas: string[] = [];
@@ -30,20 +30,13 @@ export class PrecipitacionesFiltrosComponent {
   constructor() {}
 
   filtrar() {
-    let datosFiltrados: DatosPluviometricos[] = [...this.datosOriginales];
-    console.log(this.provinciasSeleccionadas);
-    console.log(this.provinciasSeleccionadasEstado);
+    let datosFiltrados: DatosPluviometricosTr[] = [...this.datosOriginales];
 
     // FILTRO DE PROVINCIA
     if (this.provinciasSeleccionadasEstado) {
       if (this.provinciasSeleccionadas.length > 0) {
         datosFiltrados = this.datosOriginales.filter(
-          (datoPluv) =>
-            this.provinciasSeleccionadas.findIndex((codigo) => {
-              console.log(datoPluv.provincia.codigo + ' - ' + codigo);
-
-              return datoPluv.provincia.codigo === codigo;
-            }) >= 0
+          (datoPluv) => this.provinciasSeleccionadas.findIndex((codigo) => datoPluv.provincia.codigo === codigo) >= 0
         );
       }
     }
