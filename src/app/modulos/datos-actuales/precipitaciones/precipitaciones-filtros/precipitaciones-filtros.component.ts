@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { TRPrecipitacion } from '../precipitaciones.component';
+import { DatosPluviometricos } from '../precipitaciones.component';
 
 @Component({
   selector: 'app-precipitaciones-filtros',
@@ -7,48 +7,47 @@ import { TRPrecipitacion } from '../precipitaciones.component';
   styleUrls: ['./precipitaciones-filtros.component.scss']
 })
 export class PrecipitacionesFiltrosComponent {
-  @Input() datosOriginales: TRPrecipitacion[] = [];
-  @Output() datosFiltrados = new EventEmitter<TRPrecipitacion[]>();
+  @Input() datosOriginales: DatosPluviometricos[] = [];
+  @Output() datosFiltrados = new EventEmitter<DatosPluviometricos[]>();
 
-  estadoFiltroProvincia: boolean = true;
-  codigoProvSelec: string[] = [];
+  provinciasSeleccionadasEstado: boolean = false;
+  provinciasSeleccionadas: string[] = [];
 
   provinciasLista: { codigo: string; valor: string }[] = [
-    { codigo: '(AB)', valor: 'Albacete' },
-    { codigo: '(CR)', valor: 'CiudadReal' },
-    { codigo: '(CO)', valor: 'Cordoba' },
-    { codigo: '(GR)', valor: 'Granada' },
-    { codigo: '(HU)', valor: 'Huelva' },
-    { codigo: '(JA)', valor: 'Jaén' },
-    { codigo: '(SE)', valor: 'Sevilla' }
+    { codigo: 'AB', valor: 'Albacete' },
+    { codigo: 'AL', valor: 'Almería' },
+    { codigo: 'BA', valor: 'Badajoz' },
+    { codigo: 'CE', valor: 'Ceuta' },
+    { codigo: 'CR', valor: 'Ciudad Real' },
+    { codigo: 'CO', valor: 'Córdoba' },
+    { codigo: 'GR', valor: 'Granada' },
+    { codigo: 'HU', valor: 'Huelva' },
+    { codigo: 'JA', valor: 'Jaén' },
+    { codigo: 'ME', valor: 'Melilla' },
+    { codigo: 'SE', valor: 'Sevilla' }
   ];
 
   constructor() {}
 
-  activarDesactivarFiltroProvincia () {
-    if (this.estadoFiltroProvincia) {
-      this.filtrarProvincia(this.codigoProvSelec);
-    } else {
-      this.filtrarProvincia([]);
-    }
-  }
+  filtrar() {
+    let datosFiltrados: DatosPluviometricos[] = [...this.datosOriginales];
+    console.log(this.provinciasSeleccionadas);
+    console.log(this.provinciasSeleccionadasEstado);
 
-  filtrarProvincia(codigoProvSelec: string[]) {
-    let datosFiltradosAux: TRPrecipitacion[] = [];
+    // FILTRO DE PROVINCIA
+    if (this.provinciasSeleccionadasEstado) {
+      if (this.provinciasSeleccionadas.length > 0) {
+        datosFiltrados = this.datosOriginales.filter(
+          (datoPluv) =>
+            this.provinciasSeleccionadas.findIndex((codigo) => {
+              console.log(datoPluv.provincia.codigo + ' - ' + codigo);
 
-    if (codigoProvSelec.length === 0) {
-      datosFiltradosAux = this.datosOriginales;
-    } else {
-      this.codigoProvSelec = codigoProvSelec;
-      datosFiltradosAux = this.datosOriginales.filter((pluviometro) => {
-        if (codigoProvSelec.findIndex((codigo) => pluviometro.nombrePunto.includes(codigo)) >= 0) {
-          return true;
-        } else {
-          return false;
-        }
-      });
+              return datoPluv.provincia.codigo === codigo;
+            }) >= 0
+        );
+      }
     }
 
-    this.datosFiltrados.emit(datosFiltradosAux);
+    this.datosFiltrados.emit(datosFiltrados);
   }
 }

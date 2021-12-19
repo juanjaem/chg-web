@@ -3,13 +3,24 @@ import { Component, OnInit } from '@angular/core';
 import { PeticionesService, PeticionOpciones } from './../../../nucleo/servicios/peticiones/peticiones.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
-export interface TRPrecipitacion {
-  nombrePunto: string;
-  horaActual: string;
-  ultimas12horas: string;
-  acumuladoHoy: string;
-  acumuladoAyer: string;
-  unidad: string;
+export interface DatosPluviometricos {
+  pluviometro: {
+    codigo: string;
+    nombre: string;
+  };
+  provincia: {
+    codigo: string;
+    nombre: string;
+  };
+  precipitacionesHoraActual: string;
+  precipitacionesUltimas12horas: string;
+  precipitacionesAcumuladoHoy: string;
+  precipitacionesAcumuladoAyer: string;
+  precipitacionesUnidad: string;
+  ubicacion?: {
+    lat: number;
+    lng: number;
+  };
 }
 
 @Component({
@@ -18,8 +29,8 @@ export interface TRPrecipitacion {
   styleUrls: ['./precipitaciones.component.scss']
 })
 export class PrecipitacionesComponent implements OnInit {
-  datosOriginales: TRPrecipitacion[] = [];
-  datosFiltrados: TRPrecipitacion[] = [];
+  datosOriginales: DatosPluviometricos[] = [];
+  datosFiltrados: DatosPluviometricos[] = [];
 
   constructor(private peticionesService: PeticionesService) {}
 
@@ -31,7 +42,7 @@ export class PrecipitacionesComponent implements OnInit {
       mostrarAlertaError: false
     };
 
-    this.peticionesService.peticion<TRPrecipitacion[]>(peticionesOpciones).subscribe((res) => {
+    this.peticionesService.peticion<DatosPluviometricos[]>(peticionesOpciones).subscribe((res) => {
       if (res.body) {
         this.datosOriginales = res.body;
         this.datosFiltrados = res.body;
@@ -39,7 +50,7 @@ export class PrecipitacionesComponent implements OnInit {
     });
   }
 
-  actualizarDatosFiltrados(datosFiltrados: TRPrecipitacion[]) {
+  actualizarDatosFiltrados(datosFiltrados: DatosPluviometricos[]) {
     this.datosFiltrados = datosFiltrados;
   }
 }

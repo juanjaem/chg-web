@@ -8,7 +8,7 @@
       <div class="prec-filtro__filtros__estaciones--filtro">
         <mat-form-field appearance="fill">
           <mat-label>ESTACIONES</mat-label>
-          <mat-select multiple (valueChange)="filtrarProvincia($event)" disabled="true">
+          <mat-select multiple disabled="true">
             <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia">{{ provincia }}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -19,14 +19,17 @@
     <div class="prec-filtro__filtros__provincias">
       <div class="prec-filtro__filtros__provincias--titulo">Filtrar por provincias:</div>
 
-      <div class="prec-filtro__filtros__provincias--filtro">
+      <div
+        class="prec-filtro__filtros__provincias--filtro"
+        [ngClass]="{ 'selector-multiple-seleccionado': provinciasSeleccionadasEstado && provinciasSeleccionadas.length > 0 }"
+      >
         <mat-form-field appearance="fill">
           <mat-label>PROVINCIAS</mat-label>
-          <mat-select multiple (valueChange)="filtrarProvincia($event)">
+          <mat-select multiple (valueChange)="provinciasSeleccionadas = $event; filtrar()">
             <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia.codigo">{{ provincia.valor }}</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-slide-toggle [(ngModel)]="estadoFiltroProvincia" [checked]="true" (change)="activarDesactivarFiltroProvincia()"></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="provinciasSeleccionadasEstado" (change)="filtrar()"></mat-slide-toggle>
       </div>
     </div>
   </div>
