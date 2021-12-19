@@ -1,18 +1,20 @@
 <div class="prec-filtro sombreado-1">
-  <h3 class="prec-filtro__titulo">FILTROS</h3>
+  <h4 class="prec-filtro__titulo">OPCIONES DE TABLA</h4>
 
   <div class="prec-filtro__filtros">
     <div class="prec-filtro__filtros__estaciones">
-      <div class="prec-filtro__filtros__estaciones--titulo">Filtrar por estaciones meteorológicas:</div>
+      <div class="prec-filtro__filtros__estaciones--titulo">Establecer favoritos</div>
 
       <div class="prec-filtro__filtros__estaciones--filtro">
         <mat-form-field appearance="fill">
-          <mat-label>ESTACIONES</mat-label>
-          <mat-select multiple disabled="true">
-            <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia">{{ provincia }}</mat-option>
+          <mat-label>FAVORITOS</mat-label>
+          <mat-select multiple (valueChange)="favoritosSeleccionados = $event; aplicarOpciones()">
+            <mat-option *ngFor="let datoOriginal of datosOriginales" [value]="datoOriginal.pluviometro.nombre">
+              ({{ datoOriginal.provincia.codigo }}) {{ datoOriginal.pluviometro.nombre }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-slide-toggle disabled="true"></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="favoritosSeleccionadosEstado" (change)="aplicarOpciones()"></mat-slide-toggle>
       </div>
     </div>
 
@@ -25,11 +27,11 @@
       >
         <mat-form-field appearance="fill">
           <mat-label>PROVINCIAS</mat-label>
-          <mat-select multiple (valueChange)="provinciasSeleccionadas = $event; filtrar()">
+          <mat-select multiple (valueChange)="provinciasSeleccionadas = $event; aplicarOpciones()">
             <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia.codigo">{{ provincia.valor }} ({{ provincia.codigo }})</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-slide-toggle [(ngModel)]="provinciasSeleccionadasEstado" (change)="filtrar()"></mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="provinciasSeleccionadasEstado" (change)="aplicarOpciones()"></mat-slide-toggle>
       </div>
     </div>
   </div>

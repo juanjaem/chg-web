@@ -1,16 +1,8 @@
-<table
-  mat-table
-  matSort
-  [dataSource]="datosTabla"
-  class="prec-tabla mat-elevation-z8"
-  *ngIf="datosTabla"
-  matSortActive="acumuladoHoy"
-  matSortDirection="desc"
->
+<table mat-table matSort [dataSource]="datosTabla" class="prec-tabla mat-elevation-z8" *ngIf="datosTabla" matSortActive="acumuladoHoy" matSortDirection="desc">
   <ng-container matColumnDef="nombrePunto">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
     <td mat-cell *matCellDef="let e">
-      {{ e.pluviometro.nombre }} <span>({{ e.provincia.codigo }})</span>
+      {{ e.pluviometro.nombre }} <span>({{ e.provincia.codigo }})</span> <span *ngIf="e?.favorito">*</span>
     </td>
   </ng-container>
 

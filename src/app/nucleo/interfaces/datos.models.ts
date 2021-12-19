@@ -7,10 +7,10 @@ export interface DatosPluviometricosTr {
     codigo: string;
     nombre: string;
   };
-  precipitacionesHoraActual: string;
-  precipitacionesUltimas12horas: string;
-  precipitacionesAcumuladoHoy: string;
-  precipitacionesAcumuladoAyer: string;
+  precipitacionesHoraActual: number;
+  precipitacionesUltimas12horas: number;
+  precipitacionesAcumuladoHoy: number;
+  precipitacionesAcumuladoAyer: number;
   precipitacionesUnidad: string;
   ubicacion?: {
     lat: number;
