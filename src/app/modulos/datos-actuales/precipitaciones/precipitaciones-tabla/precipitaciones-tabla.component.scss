@@ -20,9 +20,20 @@
   }
 
   td:first-of-type {
-    span {
-      color: darkgoldenrod;
-      word-break: normal;
+    div {
+      display: flex;
+      align-items: center;
+
+      mat-icon {
+        color: #f49aff; // Color de favorito
+      }
+
+      > span:last-of-type {
+        word-break: break-all; // romper nombre de pluviómetro para ajustar ancho
+        & > span {
+          color: #da9700; // Color de provincia (JA)
+        }
+      }
     }
   }
 
@@ -39,6 +50,7 @@
     }
   }
 
-
+  .favorito-columna {
+    background-color: #ffecfa  !important;
+  }
 }
-
