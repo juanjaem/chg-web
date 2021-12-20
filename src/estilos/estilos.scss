@@ -1,17 +1,36 @@
 @use 'colores';
 @use 'material-configuracion';
 @use 'fuentes';
+@import "./_tamano-pantallas";
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: "Noto Sans HK", "Noto Sans", sans-serif;}
 
+// CONFIGURACIÓN GLOBALS ===================
 * { font-family: "Noto Sans HK", "Noto Sans", sans-serif; }
-h1 {font-family: "Noto Sans HK"; font-weight: 700; font-size: 28px; margin: 0;}
-h2 {font-family: "Noto Sans HK"; font-weight: 700; font-size: 24px; margin: 0;}
-h3 {font-family: "Noto Sans HK"; font-weight: 700; font-size: 22px; margin: 0;}
-h4 {font-family: "Noto Sans HK"; font-weight: 500; font-size: 20px; margin: 0;}
-h5 {font-family: "Noto Sans HK"; font-weight: 500; font-size: 18px; margin: 0;}
-p {font-family: "Noto Sans HK"; font-weight: 400; font-size: 14px; margin: 0;}
+h1 {font-family: "Noto Sans HK"; font-weight: 700; font-size: 1.6em; margin: 0;}
+h2 {font-family: "Noto Sans HK"; font-weight: 700; font-size: 1.4em; margin: 0;}
+h3 {font-family: "Noto Sans HK"; font-weight: 700; font-size: 1.2em; margin: 0;}
+h4 {font-family: "Noto Sans HK"; font-weight: 500; font-size: 1.1em; margin: 0;}
+h5 {font-family: "Noto Sans HK"; font-weight: 500; font-size: 1em; margin: 0;}
+p {font-family: "Noto Sans HK"; font-weight: 400; font-size: 0.9em; margin: 0;}
+
+body {
+  @media (max-width: $pantalla-pequena) {
+    font-size: 1em;
+  }
+  @media (min-width: calc($pantalla-pequena + 1px)) and (max-width: $pantalla-mediana) {
+    font-size: 1.2em;
+  }
+
+  @media (min-width: calc($pantalla-mediana + 1px)) {
+    font-size: 1.3em;
+  }
+
+}
+//==========================================
+
 
 
 // ESTILOS GLOBALES ========================

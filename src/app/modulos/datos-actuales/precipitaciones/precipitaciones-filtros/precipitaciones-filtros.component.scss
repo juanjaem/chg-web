@@ -1,3 +1,31 @@
+@mixin input-multiple() {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5em;
+  &--titulo {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5em;
+  }
+  &--filtro {
+    display: flex;
+    flex-direction: row;
+    column-gap: 1.5em;
+    justify-content: space-between;
+    mat-slide-toggle {
+      margin-top: 1em;
+      margin-right: 1em;
+    }
+    mat-form-field {
+      width: 100%;
+    }
+    mat-select {
+      font-size: 0.75em;
+    }
+  }
+}
+
+
 .prec-filtro {
   display: flex;
   flex-direction: column;
@@ -5,67 +33,15 @@
   padding: 0.75em;
   background-color: rgb(248, 255, 254);
 
-  &__titulo {
-
-  }
+  // &__titulo {}
 
   &__filtros {
-    &__provincias {
-      display: flex;
-      flex-direction: row;
-      column-gap: 0.5em;
-    }
-
     &__estaciones {
-      display: flex;
-      flex-direction: column;
-      row-gap: 0.5em;
-      &--titulo {
-        display: flex;
-        flex-direction: row;
-        column-gap: 0.5em;
-      }
-      &--filtro {
-        display: flex;
-        flex-direction: row;
-        column-gap: 1.5em;
-        justify-content: space-between;
-
-        mat-slide-toggle {
-          margin-top: 1em;
-          margin-right: 1em;
-        }
-
-        mat-form-field {
-          width: 100%;
-        }
-      }
+      @include input-multiple();
     }
 
     &__provincias {
-      display: flex;
-      flex-direction: column;
-      row-gap: 0.5em;
-      &--titulo {
-        display: flex;
-        flex-direction: row;
-        column-gap: 0.5em;
-      }
-      &--filtro {
-        display: flex;
-        flex-direction: row;
-        column-gap: 1.5em;
-        justify-content: space-between;
-
-        mat-slide-toggle {
-          margin-top: 1em;
-          margin-right: 1em;
-        }
-
-        mat-form-field {
-          width: 100%;
-        }
-      }
+      @include input-multiple();
     }
   }
 }

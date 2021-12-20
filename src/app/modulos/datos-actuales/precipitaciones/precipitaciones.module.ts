@@ -11,6 +11,7 @@ import { PrecipitacionesFiltrosComponent } from './precipitaciones-filtros/preci
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [PrecipitacionesTablaComponent, PrecipitacionesFiltrosComponent],
@@ -25,7 +26,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatCheckboxModule,
     MatSlideToggleModule,
     MatSortModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   exports: [PrecipitacionesTablaComponent, PrecipitacionesFiltrosComponent]
 })

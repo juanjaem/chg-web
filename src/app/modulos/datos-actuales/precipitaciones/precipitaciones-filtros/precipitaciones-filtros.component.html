@@ -1,14 +1,22 @@
 <div class="prec-filtro sombreado-1">
-  <h4 class="prec-filtro__titulo">OPCIONES DE TABLA</h4>
+  <h5 class="prec-filtro__titulo">OPCIONES DE TABLA</h5>
 
   <div class="prec-filtro__filtros">
     <div class="prec-filtro__filtros__estaciones">
-      <div class="prec-filtro__filtros__estaciones--titulo">Establecer favoritos:</div>
+      <p class="prec-filtro__filtros__estaciones--titulo">Establecer favoritos:</p>
 
-      <div class="prec-filtro__filtros__estaciones--filtro">
-        <mat-form-field appearance="fill">
+      <div
+        class="prec-filtro__filtros__estaciones--filtro"
+        [ngClass]="{ 'selector-multiple-seleccionado': filtros.favoritosSeleccionadosEstado && filtros.favoritosSeleccionados.length > 0 }"
+      >
+        <mat-form-field appearance="fill" disabled>
           <mat-label>FAVORITOS</mat-label>
-          <mat-select multiple [ngModel]="filtros.favoritosSeleccionados" (valueChange)="filtros.favoritosSeleccionados = $event; aplicarFiltros()">
+          <mat-select
+            multiple
+            [ngModel]="filtros.favoritosSeleccionados"
+            (valueChange)="filtros.favoritosSeleccionados = $event; aplicarFiltros()"
+            [disabled]="_datosOriginales.length === 0"
+          >
             <mat-option *ngFor="let datoOriginal of _datosOriginales" [value]="datoOriginal.pluviometro.nombre">
               ({{ datoOriginal.provincia.codigo }}) {{ datoOriginal.pluviometro.nombre }}
             </mat-option>
@@ -19,7 +27,7 @@
     </div>
 
     <div class="prec-filtro__filtros__provincias">
-      <div class="prec-filtro__filtros__provincias--titulo">Filtrar por provincias:</div>
+      <p class="prec-filtro__filtros__provincias--titulo">Filtrar por provincias:</p>
 
       <div
         class="prec-filtro__filtros__provincias--filtro"

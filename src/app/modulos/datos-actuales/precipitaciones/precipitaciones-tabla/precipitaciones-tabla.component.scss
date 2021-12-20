@@ -1,57 +1,73 @@
 .prec-tabla {
-  // padding: 0 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  table {
+    width: 100%;
+    max-width: 30em;
+    tr > th,td {
+      text-align: center;
+      padding: 0 0.125em;
+      font-size: 0.75em;
 
-  tr > th,td {
-    text-align: center;
-    padding: 0 2px;
-    width: 41px;
+      // width: 41px;
 
-    &:first-of-type{
-      text-align: left;
-      word-break: break-all;
-      padding-left: 4px;
-      width: auto;
-      font-size: 12px;
-    }
-
-    &:last-of-type {
-      padding-right: 0px;
-    }
-  }
-
-  td:first-of-type {
-    div {
-      display: flex;
-      align-items: center;
-
-      mat-icon {
-        color: #f49aff; // Color de favorito
+      &:first-of-type{
+        text-align: left;
+        word-break: break-all;
+        padding-left: 0.25em;
+        width: auto;
+        max-width: 100%;
       }
 
-      > span:last-of-type {
-        word-break: break-all; // romper nombre de pluviómetro para ajustar ancho
-        & > span {
-          color: #da9700; // Color de provincia (JA)
-          word-break: normal;
+      &:last-of-type {
+        padding-right: 0;
+      }
+    }
+
+    td:first-of-type {
+      div {
+        display: flex;
+        align-items: center;
+
+        mat-icon {
+          color: #f49aff; // Color de favorito
+        }
+
+        > span:last-of-type {
+          word-break: break-all; // romper nombre de pluviómetro para ajustar ancho
+          & > span {
+            color: #da9700; // Color de provincia (JA)
+            word-break: normal;
+          }
         }
       }
     }
-  }
 
-  .mat-header-row {
-    background-color: rgb(196, 248, 255);
-  }
-
-  .mat-row {
-    &:nth-child(even) {
-      background-color: rgb(247, 255, 235);
+    .mat-header-row {
+      background-color: rgb(196, 248, 255);
     }
-    &:nth-child(odd) {
-      background-color: white;
+
+    .mat-row {
+      &:nth-child(even) {
+        background-color: rgb(247, 255, 235);
+      }
+      &:nth-child(odd) {
+        background-color: white;
+      }
     }
+
+    .favorito-columna {
+      background-color: #ffecfa  !important;
+    }
+
   }
 
-  .favorito-columna {
-    background-color: #ffecfa  !important;
+  &--spinner {
+    margin: 2em 0;
   }
+  // @media (min-width: 600px) {
+  //   font-size: 1.5em;
+  // }
 }
+

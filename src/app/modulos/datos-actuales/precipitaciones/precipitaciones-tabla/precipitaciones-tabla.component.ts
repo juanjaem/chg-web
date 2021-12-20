@@ -10,7 +10,7 @@ import * as lodash from 'lodash';
   styleUrls: ['./precipitaciones-tabla.component.scss']
 })
 export class PrecipitacionesTablaComponent {
-  datosTabla: MatTableDataSource<DatosPluviometricosTrExt> | undefined;
+  datosTabla: MatTableDataSource<DatosPluviometricosTrExt> = new MatTableDataSource();
 
   @ViewChild(MatSort) sort!: MatSort;
   @Input() set datosOriginales(datos: DatosPluviometricosTrExt[]) {
