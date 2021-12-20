@@ -46,4 +46,15 @@ body {
     background-color: rgba(207, 255, 217, 0.5);
   }
 }
+
+.boton-header-alineado-verticalmente {
+  .mat-sort-header-container {
+    display: flex;
+    flex-direction: column;
+    .mat-sort-header-arrow {
+      margin: 0.2em 0 0 0;
+    }
+  }
+}
+
 //==========================================
