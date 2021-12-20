@@ -78,6 +78,9 @@
               "browserTarget": "chg-web:build:development"
             }
           },
+          "options": {
+            "port": 4210
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
