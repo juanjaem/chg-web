@@ -13,7 +13,14 @@
       <td mat-cell *matCellDef="let e">
         <div>
           <span *ngIf="e?.favorito">
-            <mat-icon aria-hidden="false" aria-label="Favorito">star</mat-icon>
+            <button mat-raised-button (click)="favorito.emit(e.pluviometro.nombre)">
+              <mat-icon class="favorito-activo" aria-hidden="false" aria-label="Favorito">star</mat-icon>
+            </button>
+          </span>
+          <span *ngIf="!e?.favorito">
+            <button mat-raised-button (click)="favorito.emit(e.pluviometro.nombre)">
+              <mat-icon class="favorito-desactivo" aria-hidden="false" aria-label="Favorito">star_border</mat-icon>
+            </button>
           </span>
           <span>
             {{ e.pluviometro.nombre }} <span>({{ e.provincia.codigo }})</span>

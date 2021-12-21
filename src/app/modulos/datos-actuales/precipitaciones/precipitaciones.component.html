@@ -1,5 +1,9 @@
 <div class="precipitaciones">
   <h4>Precipitaciones</h4>
-  <app-precipitaciones-filtros [datosOriginales]="datosOriginales" (datosFiltrados)="actualizarDatosFiltrados($event)"></app-precipitaciones-filtros>
-  <app-precipitaciones-tabla [datosOriginales]="datosFiltrados"></app-precipitaciones-tabla>
+  <app-precipitaciones-filtros
+    #appPrecipFiltros
+    [datosOriginales]="datosOriginales"
+    (datosFiltrados)="actualizarDatosFiltrados($event)"
+  ></app-precipitaciones-filtros>
+  <app-precipitaciones-tabla [datosOriginales]="datosFiltrados" (favorito)="appPrecipFiltros.favorito = $event"></app-precipitaciones-tabla>
 </div>

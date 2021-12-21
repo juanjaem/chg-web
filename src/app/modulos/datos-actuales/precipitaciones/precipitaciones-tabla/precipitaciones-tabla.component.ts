@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatosPluviometricosTrExt } from '../precipitaciones.component';
@@ -18,6 +18,7 @@ export class PrecipitacionesTablaComponent {
     this.datosTabla.sortData = this.ordenamientoPersonalizado;
     this.datosTabla.sort = this.sort; // Para que ordene justo despues de obtener nuevos datos
   }
+  @Output() favorito = new EventEmitter<string>();
 
   displayedColumns: string[] = ['nombrePunto', 'horaActual', 'ultimas12horas', 'acumuladoHoy', 'acumuladoAyer'];
 

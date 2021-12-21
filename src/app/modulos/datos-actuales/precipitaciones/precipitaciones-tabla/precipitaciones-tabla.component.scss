@@ -28,9 +28,17 @@
       div {
         display: flex;
         align-items: center;
-
-        mat-icon {
-          color: #f49aff; // Color de favorito
+        column-gap: 0.25em;
+        button {
+          line-height: 0;
+          padding: 0;
+          min-width: 0;
+          .favorito-activo {
+            color: #f49aff; // Color de favorito activo
+          }
+          .favorito-desactivo {
+            color: lightgray; // Color de favorito desactivado
+          }
         }
 
         > span:last-of-type {

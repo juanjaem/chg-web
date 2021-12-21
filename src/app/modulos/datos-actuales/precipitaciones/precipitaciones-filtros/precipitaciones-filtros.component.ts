@@ -32,6 +32,18 @@ export class PrecipitacionesFiltrosComponent {
     }
   }
 
+  @Input() set favorito(favorito: string) {
+    const idx = this.filtros.favoritosSeleccionados.findIndex((prov) => prov === favorito);
+    console.log(idx);
+    if (idx >= 0) {
+      this.filtros.favoritosSeleccionados = this.filtros.favoritosSeleccionados.filter((prov) => prov !== favorito);
+    } else {
+      this.filtros.favoritosSeleccionados.push(favorito);
+      this.filtros.favoritosSeleccionados = this.filtros.favoritosSeleccionados;
+    }
+    this.aplicarFiltros();
+  }
+
   filtros: FiltrosPreciptacionesTr = {
     provinciasSeleccionadasEstado: false,
     provinciasSeleccionadas: [],
