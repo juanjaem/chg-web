@@ -1,28 +1,23 @@
-<div class="prec-filtro sombreado-1">
+<div class="prec-filtro sombreado-1" [ngClass]="{ 'click-deshabilitado': _datosOriginales.length === 0 }">
   <h5 class="prec-filtro__titulo">OPCIONES DE TABLA</h5>
 
-  <div class="prec-filtro__filtros">
+  <form class="prec-filtro__filtros" [formGroup]="filtrosForm">
     <div class="prec-filtro__filtros__estaciones">
       <p class="prec-filtro__filtros__estaciones--titulo">Establecer favoritos:</p>
 
       <div
         class="prec-filtro__filtros__estaciones--filtro"
-        [ngClass]="{ 'selector-multiple-seleccionado': filtros.favoritosSeleccionadosEstado && filtros.favoritosSeleccionados.length > 0 }"
+        [ngClass]="{ 'selector-multiple-seleccionado': filtrosForm.get('favoritosEstado')?.value && filtrosForm.get('favoritos')?.value.length > 0 }"
       >
-        <mat-form-field appearance="fill" disabled>
+        <mat-form-field appearance="fill">
           <mat-label>FAVORITOS</mat-label>
-          <mat-select
-            multiple
-            [ngModel]="filtros.favoritosSeleccionados"
-            (valueChange)="filtros.favoritosSeleccionados = $event; aplicarFiltros()"
-            [disabled]="_datosOriginales.length === 0"
-          >
+          <mat-select multiple id="favoritos" formControlName="favoritos">
             <mat-option *ngFor="let datoOriginal of _datosOriginales" [value]="datoOriginal.pluviometro.nombre">
               ({{ datoOriginal.provincia.codigo }}) {{ datoOriginal.pluviometro.nombre }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-slide-toggle [(ngModel)]="filtros.favoritosSeleccionadosEstado" (change)="aplicarFiltros()"></mat-slide-toggle>
+        <mat-slide-toggle id="favoritosEstado" formControlName="favoritosEstado"></mat-slide-toggle>
       </div>
     </div>
 
@@ -31,16 +26,16 @@
 
       <div
         class="prec-filtro__filtros__provincias--filtro"
-        [ngClass]="{ 'selector-multiple-seleccionado': filtros.provinciasSeleccionadasEstado && filtros.provinciasSeleccionadas.length > 0 }"
+        [ngClass]="{ 'selector-multiple-seleccionado': filtrosForm.get('provinciasEstado')?.value && filtrosForm.get('provincias')?.value.length > 0 }"
       >
         <mat-form-field appearance="fill">
           <mat-label>PROVINCIAS</mat-label>
-          <mat-select multiple [ngModel]="filtros.provinciasSeleccionadas" (valueChange)="filtros.provinciasSeleccionadas = $event; aplicarFiltros()">
+          <mat-select multiple id="provincias" formControlName="provincias">
             <mat-option *ngFor="let provincia of provinciasLista" [value]="provincia.codigo">{{ provincia.valor }} ({{ provincia.codigo }})</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-slide-toggle [(ngModel)]="filtros.provinciasSeleccionadasEstado" (change)="aplicarFiltros()"></mat-slide-toggle>
+        <mat-slide-toggle id="provincias" formControlName="provinciasEstado"></mat-slide-toggle>
       </div>
     </div>
-  </div>
+  </form>
 </div>

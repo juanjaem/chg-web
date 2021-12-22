@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PeticionesService, PeticionOpciones } from './../../../nucleo/servicios/peticiones/peticiones.service';
 import { DatosPluviometricosTr } from 'src/app/nucleo/interfaces/datos.models';
 import { GetDatosPluviometricosTrResp } from 'src/app/nucleo/interfaces/respuesta.models';
+import { delay } from 'rxjs';
 
 export interface DatosPluviometricosTrExt extends DatosPluviometricosTr {
   favorito?: boolean;

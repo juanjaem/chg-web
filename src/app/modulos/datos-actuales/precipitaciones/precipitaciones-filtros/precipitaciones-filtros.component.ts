@@ -1,6 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { DatosPluviometricosTrExt } from '../precipitaciones.component';
 import * as lodash from 'lodash';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { PROVINCIAS_LISTA } from './../../../../nucleo/constantes/provincias';
 
 const PROVINCIAS_SELECIONADAS_ESTADO = 'fil-prec-tr_prov-sel-est_v1';
 const PROVINCIAS_SELECIONADAS = 'fil-prec-tr_prov-sel_v1';
@@ -8,10 +11,10 @@ const FAVORITOS_SELECCIONADOS_ESTADO = 'fil-prec-tr_favo-sel-est_v1';
 const FAVORITOS_SELECCIONADOS = 'fil-prec-tr_favo-sel-_v1';
 
 export interface FiltrosPreciptacionesTr {
-  provinciasSeleccionadasEstado: boolean;
-  provinciasSeleccionadas: string[];
-  favoritosSeleccionadosEstado: boolean;
-  favoritosSeleccionados: string[];
+  provinciasEstado: boolean;
+  provincias: string[];
+  favoritosEstado: boolean;
+  favoritos: string[];
 }
 
 @Component({
@@ -19,72 +22,65 @@ export interface FiltrosPreciptacionesTr {
   templateUrl: './precipitaciones-filtros.component.html',
   styleUrls: ['./precipitaciones-filtros.component.scss']
 })
-export class PrecipitacionesFiltrosComponent {
+export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy {
   @Output() datosFiltrados = new EventEmitter<DatosPluviometricosTrExt[]>();
 
   _datosOriginales: DatosPluviometricosTrExt[] = [];
   @Input() set datosOriginales(datos: DatosPluviometricosTrExt[]) {
-    this._datosOriginales = datos;
-    // console.log('ENTRA');
     if (datos.length > 0) {
-      this.filtros = this.obtenerFiltros();
-      this.aplicarFiltros();
+      this._datosOriginales = datos;
+      this.filtrosForm.setValue(this.obtenerFiltros());
     }
   }
 
   @Input() set favorito(favorito: string) {
-    const idx = this.filtros.favoritosSeleccionados.findIndex((prov) => prov === favorito);
-    console.log(idx);
+    const idx = this.filtrosForm.controls['favoritos'].value.findIndex((prov: string) => prov === favorito);
     if (idx >= 0) {
-      this.filtros.favoritosSeleccionados = this.filtros.favoritosSeleccionados.filter((prov) => prov !== favorito);
+      this.filtrosForm.controls['favoritos'].setValue(this.filtrosForm.controls['favoritos'].value.filter((prov: string) => prov !== favorito));
     } else {
-      this.filtros.favoritosSeleccionados.push(favorito);
-      this.filtros.favoritosSeleccionados = this.filtros.favoritosSeleccionados;
+      this.filtrosForm.controls['favoritos'].setValue([...this.filtrosForm.controls['favoritos'].value, favorito]);
     }
-    this.aplicarFiltros();
   }
 
-  filtros: FiltrosPreciptacionesTr = {
-    provinciasSeleccionadasEstado: false,
-    provinciasSeleccionadas: [],
-    favoritosSeleccionadosEstado: false,
-    favoritosSeleccionados: []
-  };
+  provinciasLista = PROVINCIAS_LISTA;
 
-  provinciasLista: { codigo: string; valor: string }[] = [
-    { codigo: 'AB', valor: 'Albacete' },
-    { codigo: 'AL', valor: 'Almería' },
-    { codigo: 'BA', valor: 'Badajoz' },
-    { codigo: 'CE', valor: 'Ceuta' },
-    { codigo: 'CR', valor: 'Ciudad Real' },
-    { codigo: 'CO', valor: 'Córdoba' },
-    { codigo: 'GR', valor: 'Granada' },
-    { codigo: 'HU', valor: 'Huelva' },
-    { codigo: 'JA', valor: 'Jaén' },
-    { codigo: 'ME', valor: 'Melilla' },
-    { codigo: 'SE', valor: 'Sevilla' }
-  ];
+  filtrosForm = new FormGroup({
+    favoritos: new FormControl([]),
+    favoritosEstado: new FormControl(false),
+    provincias: new FormControl([]),
+    provinciasEstado: new FormControl(false)
+  });
+
+  filtrosFormSubs: Subscription | undefined;
 
   constructor() {}
 
-  aplicarFiltros(): void {
+  ngAfterViewInit(): void {
+    this.filtrosFormSubs = this.filtrosForm.valueChanges.subscribe((filtros: FiltrosPreciptacionesTr) => {
+      this.aplicarFiltros(filtros);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.filtrosFormSubs?.unsubscribe();
+  }
+
+  aplicarFiltros(filtros: FiltrosPreciptacionesTr): void {
     let datosFiltrados: DatosPluviometricosTrExt[] = lodash.cloneDeep(this._datosOriginales);
-    this.almacenarFiltros(this.filtros);
+    this.almacenarFiltros(filtros);
 
     // FILTRO DE PROVINCIA
-    if (this.filtros.provinciasSeleccionadasEstado) {
-      if (this.filtros.provinciasSeleccionadas.length > 0) {
-        datosFiltrados = datosFiltrados.filter(
-          (datoPluv) => this.filtros.provinciasSeleccionadas.findIndex((codigo) => datoPluv.provincia.codigo === codigo) >= 0
-        );
+    if (filtros.provinciasEstado) {
+      if (filtros.provincias.length > 0) {
+        datosFiltrados = datosFiltrados.filter((datoPluv) => filtros.provincias.findIndex((codigo) => datoPluv.provincia.codigo === codigo) >= 0);
       }
     }
 
     // APLICAR FAVORITOS SELECCIONADOS
-    if (this.filtros.favoritosSeleccionadosEstado) {
-      if (this.filtros.favoritosSeleccionados.length > 0) {
+    if (filtros.favoritosEstado) {
+      if (filtros.favoritos.length > 0) {
         datosFiltrados.map((dato) => {
-          if (this.filtros.favoritosSeleccionados.findIndex((nombreFavorito) => nombreFavorito === dato.pluviometro.nombre) !== -1) {
+          if (filtros.favoritos.findIndex((nombreFavorito) => nombreFavorito === dato.pluviometro.nombre) !== -1) {
             dato.favorito = true;
           }
           return dato;
@@ -96,18 +92,18 @@ export class PrecipitacionesFiltrosComponent {
   }
 
   almacenarFiltros(filtros: FiltrosPreciptacionesTr): void {
-    localStorage.setItem(PROVINCIAS_SELECIONADAS_ESTADO, JSON.stringify(filtros.provinciasSeleccionadasEstado));
-    localStorage.setItem(PROVINCIAS_SELECIONADAS, JSON.stringify(filtros.provinciasSeleccionadas));
-    localStorage.setItem(FAVORITOS_SELECCIONADOS_ESTADO, JSON.stringify(filtros.favoritosSeleccionadosEstado));
-    localStorage.setItem(FAVORITOS_SELECCIONADOS, JSON.stringify(filtros.favoritosSeleccionados));
+    localStorage.setItem(PROVINCIAS_SELECIONADAS_ESTADO, JSON.stringify(filtros.provinciasEstado || false));
+    localStorage.setItem(PROVINCIAS_SELECIONADAS, JSON.stringify(filtros.provincias || []));
+    localStorage.setItem(FAVORITOS_SELECCIONADOS_ESTADO, JSON.stringify(filtros.favoritosEstado || false));
+    localStorage.setItem(FAVORITOS_SELECCIONADOS, JSON.stringify(filtros.favoritos || []));
   }
 
   obtenerFiltros(): FiltrosPreciptacionesTr {
     return {
-      provinciasSeleccionadasEstado: JSON.parse(localStorage.getItem(PROVINCIAS_SELECIONADAS_ESTADO) || 'false'),
-      provinciasSeleccionadas: JSON.parse(localStorage.getItem(PROVINCIAS_SELECIONADAS) || '[]'),
-      favoritosSeleccionadosEstado: JSON.parse(localStorage.getItem(FAVORITOS_SELECCIONADOS_ESTADO) || 'false'),
-      favoritosSeleccionados: JSON.parse(localStorage.getItem(FAVORITOS_SELECCIONADOS) || '[]')
+      provinciasEstado: JSON.parse(localStorage.getItem(PROVINCIAS_SELECIONADAS_ESTADO) || 'false'),
+      provincias: JSON.parse(localStorage.getItem(PROVINCIAS_SELECIONADAS) || '[]'),
+      favoritosEstado: JSON.parse(localStorage.getItem(FAVORITOS_SELECCIONADOS_ESTADO) || 'false'),
+      favoritos: JSON.parse(localStorage.getItem(FAVORITOS_SELECCIONADOS) || '[]')
     } as FiltrosPreciptacionesTr;
   }
 }
