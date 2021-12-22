@@ -35,11 +35,14 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
 
   @Input() set favorito(favorito: string) {
     const idx = this.filtrosForm.controls['favoritos'].value.findIndex((prov: string) => prov === favorito);
-    if (idx >= 0) {
+    if (idx >= 0 && this.filtrosForm.controls['favoritosEstado'].value) {
+      // Quitar favorito (solo cuando esté marcado el check de favoritos)
       this.filtrosForm.controls['favoritos'].setValue(this.filtrosForm.controls['favoritos'].value.filter((prov: string) => prov !== favorito));
     } else {
+      // Añadir favorito
       this.filtrosForm.controls['favoritos'].setValue([...this.filtrosForm.controls['favoritos'].value, favorito]);
     }
+    this.filtrosForm.controls['favoritosEstado'].setValue(true);
   }
 
   provinciasLista = PROVINCIAS_LISTA;
