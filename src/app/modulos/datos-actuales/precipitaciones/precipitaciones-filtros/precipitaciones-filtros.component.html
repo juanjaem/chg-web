@@ -2,18 +2,26 @@
   <h5 class="prec-filtro__titulo">OPCIONES DE TABLA</h5>
 
   <form class="prec-filtro__filtros" [formGroup]="filtrosForm">
-    <div class="prec-filtro__filtros__estaciones">
-      <p class="prec-filtro__filtros__estaciones--titulo">Establecer favoritos:</p>
+    <div class="prec-filtro__filtros__favoritos">
+      <p class="prec-filtro__filtros__favoritos__titulo">Establecer favoritos:</p>
 
       <div
-        class="prec-filtro__filtros__estaciones--filtro"
+        class="prec-filtro__filtros__favoritos__filtro"
         [ngClass]="{ 'selector-multiple-seleccionado': filtrosForm.get('favoritosEstado')?.value && filtrosForm.get('favoritos')?.value.length > 0 }"
       >
+        <!-- <input type="text" placeholder="Buscar estación..." (keyup)="buscarFavorito($event)"> -->
         <mat-form-field appearance="fill">
           <mat-label>FAVORITOS</mat-label>
           <mat-select multiple id="favoritos" formControlName="favoritos">
-            <mat-option *ngFor="let datoOriginal of _datosOriginales" [value]="datoOriginal.pluviometro.nombre">
-              ({{ datoOriginal.provincia.codigo }}) {{ datoOriginal.pluviometro.nombre }}
+            <mat-option class="buscador-selector-multiple">
+              <ngx-mat-select-search
+                (keyup)="buscarFavorito($event)"
+                placeholderLabel="Buscar favorito..."
+                noEntriesFoundLabel="La estación buscada no existe"
+              ></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let opcion of favoritosOpciones" [value]="opcion.pluviometro.nombre">
+              ({{ opcion.provincia.codigo }}) {{ opcion.pluviometro.nombre }}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -22,10 +30,10 @@
     </div>
 
     <div class="prec-filtro__filtros__provincias">
-      <p class="prec-filtro__filtros__provincias--titulo">Filtrar por provincias:</p>
+      <p class="prec-filtro__filtros__provincias__titulo">Filtrar por provincias:</p>
 
       <div
-        class="prec-filtro__filtros__provincias--filtro"
+        class="prec-filtro__filtros__provincias__filtro"
         [ngClass]="{ 'selector-multiple-seleccionado': filtrosForm.get('provinciasEstado')?.value && filtrosForm.get('provincias')?.value.length > 0 }"
       >
         <mat-form-field appearance="fill">

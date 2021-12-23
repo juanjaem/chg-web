@@ -29,6 +29,7 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
   @Input() set datosOriginales(datos: DatosPluviometricosTrExt[]) {
     if (datos.length > 0) {
       this._datosOriginales = datos;
+      this.favoritosOpciones = lodash.clone(datos);
       this.filtrosForm.setValue(this.obtenerFiltros());
     }
   }
@@ -46,6 +47,8 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
   }
 
   provinciasLista = PROVINCIAS_LISTA;
+  busquedaFavorito: string = '';
+  favoritosOpciones: DatosPluviometricosTrExt[] = [];
 
   filtrosForm = new FormGroup({
     favoritos: new FormControl([]),
@@ -108,5 +111,16 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
       favoritosEstado: JSON.parse(localStorage.getItem(FAVORITOS_SELECCIONADOS_ESTADO) || 'false'),
       favoritos: JSON.parse(localStorage.getItem(FAVORITOS_SELECCIONADOS) || '[]')
     } as FiltrosPreciptacionesTr;
+  }
+
+  buscarFavorito(e: any) {
+    this.favoritosOpciones = lodash.clone(this._datosOriginales);
+    let busqueda: string = e?.target?.value;
+
+    if (busqueda && typeof busqueda === 'string') {
+      this.favoritosOpciones = this._datosOriginales.filter((opcion) => {
+        return opcion.pluviometro.nombre.toLowerCase().indexOf(busqueda.toLowerCase()) !== -1;
+      });
+    }
   }
 }
