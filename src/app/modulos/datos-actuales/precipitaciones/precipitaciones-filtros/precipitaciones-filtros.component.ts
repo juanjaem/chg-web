@@ -32,6 +32,7 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
       this._datosOriginales = datos;
       this.favoritosOpciones = lodash.clone(datos);
       this.filtrosForm.setValue({ ...this.obtenerFiltros(), busquedaFavorito: '' });
+      this.filtrosForm.setValue({ ...this.obtenerFiltros(), busquedaFavorito: '' }); // Necesario esta 2ª asignación para que pase el pairWise()
     }
   }
 
