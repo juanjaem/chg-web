@@ -2,7 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output } from
 import { DatosPluviometricosTrExt } from '../precipitaciones.component';
 import * as lodash from 'lodash';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { pairwise, Subscription } from 'rxjs';
 import { PROVINCIAS_LISTA } from './../../../../nucleo/constantes/provincias';
 
 const PROVINCIAS_SELECIONADAS_ESTADO = 'fil-prec-tr_prov-sel-est_v1';
@@ -11,6 +11,7 @@ const FAVORITOS_SELECCIONADOS_ESTADO = 'fil-prec-tr_favo-sel-est_v1';
 const FAVORITOS_SELECCIONADOS = 'fil-prec-tr_favo-sel-_v1';
 
 export interface FiltrosPreciptacionesTr {
+  busquedaFavorito: string;
   provinciasEstado: boolean;
   provincias: string[];
   favoritosEstado: boolean;
@@ -30,7 +31,7 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
     if (datos.length > 0) {
       this._datosOriginales = datos;
       this.favoritosOpciones = lodash.clone(datos);
-      this.filtrosForm.setValue(this.obtenerFiltros());
+      this.filtrosForm.setValue({ ...this.obtenerFiltros(), busquedaFavorito: '' });
     }
   }
 
@@ -51,6 +52,7 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
   favoritosOpciones: DatosPluviometricosTrExt[] = [];
 
   filtrosForm = new FormGroup({
+    busquedaFavorito: new FormControl(''),
     favoritos: new FormControl([]),
     favoritosEstado: new FormControl(false),
     provincias: new FormControl([]),
@@ -62,8 +64,14 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
   constructor() {}
 
   ngAfterViewInit(): void {
-    this.filtrosFormSubs = this.filtrosForm.valueChanges.subscribe((filtros: FiltrosPreciptacionesTr) => {
-      this.aplicarFiltros(filtros);
+    this.filtrosFormSubs = this.filtrosForm.valueChanges.pipe(pairwise()).subscribe((filtros: FiltrosPreciptacionesTr[]) => {
+      if (filtros[0].busquedaFavorito !== filtros[1].busquedaFavorito) {
+        // Ha cambiado el valor de la busqueda de favoritos. Filtrar el combo
+        this.filtrarComboFavoritos(filtros[1].busquedaFavorito);
+      } else {
+        // Han cambiado algún filtro. Filtrar.
+        this.aplicarFiltros(filtros[1]);
+      }
     });
   }
 
@@ -113,9 +121,8 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
     } as FiltrosPreciptacionesTr;
   }
 
-  buscarFavorito(e: any) {
+  filtrarComboFavoritos(busqueda: string) {
     this.favoritosOpciones = lodash.clone(this._datosOriginales);
-    let busqueda: string = e?.target?.value;
 
     if (busqueda && typeof busqueda === 'string') {
       this.favoritosOpciones = this._datosOriginales.filter((opcion) => {

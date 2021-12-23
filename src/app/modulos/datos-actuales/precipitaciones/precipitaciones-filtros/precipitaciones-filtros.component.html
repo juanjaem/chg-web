@@ -13,9 +13,9 @@
         <mat-form-field appearance="fill">
           <mat-label>FAVORITOS</mat-label>
           <mat-select multiple id="favoritos" formControlName="favoritos">
-            <mat-option class="buscador-selector-multiple">
+            <mat-option>
               <ngx-mat-select-search
-                (keyup)="buscarFavorito($event)"
+                formControlName="busquedaFavorito"
                 placeholderLabel="Buscar favorito..."
                 noEntriesFoundLabel="La estación buscada no existe"
               ></ngx-mat-select-search>
