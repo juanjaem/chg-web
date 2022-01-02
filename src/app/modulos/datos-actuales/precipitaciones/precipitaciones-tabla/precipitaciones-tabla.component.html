@@ -22,8 +22,13 @@
               <mat-icon class="favorito-desactivo" aria-hidden="false" aria-label="Favorito">star_border</mat-icon>
             </button>
           </span>
+          <span *ngIf="e.coordenadasDecimal">
+            <button mat-raised-button (click)="abrirMapa.emit(e)">
+              <mat-icon class="mapa" aria-hidden="false" aria-label="Mapa">location_on</mat-icon>
+            </button>
+          </span>
           <span>
-            {{ e.pluviometro.nombre }} <span>({{ e.provincia.codigo }})</span>
+            {{ e.pluviometro.nombreWeb }} <span>({{ e.provincia.codigo }})</span>
           </span>
         </div>
       </td>

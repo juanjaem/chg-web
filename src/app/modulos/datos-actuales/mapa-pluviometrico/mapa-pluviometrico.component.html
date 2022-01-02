@@ -1,0 +1,29 @@
+<div class="map-container">
+  <div class="botones">
+    <button mat-fab class="botones__cerrar" aria-label="Cerrar" (click)="cerrar()" tabindex="-1">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <button mat-mini-fab class="botones__capas" [matMenuTriggerFor]="menuMapaPluviometrico" aria-label="Capas" tabindex="-1">
+      <mat-icon>layers</mat-icon>
+    </button>
+
+    <mat-menu #menuMapaPluviometrico="matMenu">
+      <button mat-menu-item (click)="cambiarCapa('rasterIgn')">
+        <mat-icon>map</mat-icon>
+        <span>Raster IGN</span>
+      </button>
+      <button mat-menu-item (click)="cambiarCapa('googleHybrid')">
+        <mat-icon>map</mat-icon>
+        <span>Google Hybrid</span>
+      </button>
+      <button mat-menu-item (click)="cambiarCapa('openStreetMap')">
+        <mat-icon>map</mat-icon>
+        <span>Open Streets Map</span>
+      </button>
+    </mat-menu>
+  </div>
+  <div class="map-frame">
+    <div id="map"></div>
+  </div>
+</div>

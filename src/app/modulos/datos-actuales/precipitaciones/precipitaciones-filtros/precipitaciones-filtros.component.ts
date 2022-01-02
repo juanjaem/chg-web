@@ -95,7 +95,7 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
     if (filtros.favoritosEstado) {
       if (filtros.favoritos.length > 0) {
         datosFiltrados.map((dato) => {
-          if (filtros.favoritos.findIndex((nombreFavorito) => nombreFavorito === dato.pluviometro.nombre) !== -1) {
+          if (filtros.favoritos.findIndex((nombreFavorito) => nombreFavorito === dato.pluviometro.nombreWeb) !== -1) {
             dato.favorito = true;
           }
           return dato;
@@ -127,7 +127,7 @@ export class PrecipitacionesFiltrosComponent implements AfterViewInit, OnDestroy
 
     if (busqueda && typeof busqueda === 'string') {
       this.favoritosOpciones = this._datosOriginales.filter((opcion) => {
-        return opcion.pluviometro.nombre.toLowerCase().indexOf(busqueda.toLowerCase()) !== -1;
+        return opcion.pluviometro.nombreWeb.toLowerCase().indexOf(busqueda.toLowerCase()) !== -1;
       });
     }
   }

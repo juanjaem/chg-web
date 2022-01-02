@@ -1,0 +1,40 @@
+:host {
+  display: block;
+  background: white;
+}
+
+.map-container {
+  position: relative;
+  // width: 100vw;
+  height: 100vh;
+  // top: 0;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
+  // margin: 30px;
+}
+
+.map-frame {
+  // border: 1px solid black;
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+}
+
+.botones {
+  &__cerrar {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    z-index: 500;
+  }
+  &__capas {
+    position: absolute;
+    right: 1.6em;
+    top: 6em;
+    z-index: 500;
+  }
+}
+

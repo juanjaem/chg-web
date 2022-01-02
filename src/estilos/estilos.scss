@@ -57,5 +57,15 @@ body {
   }
 }
 
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  &.oscuro {
+    background: #000;
+    opacity: 0.5 !important;
+  }
+}
+
+.mapa-pluviometria, .mat-dialog-container {
+  padding: 0 !important;
+}
 //==========================================
 

@@ -39,12 +39,15 @@
           .favorito-desactivo {
             color: lightgray; // Color de favorito desactivado
           }
+          .mapa {
+            color: #efcbad;
+          }
         }
 
         > span:last-of-type {
           word-break: break-all; // romper nombre de pluviómetro para ajustar ancho
           & > span {
-            color: #da9700; // Color de provincia (JA)
+            color: #a6a6a6; // Color de provincia (JA)
             word-break: normal;
           }
         }

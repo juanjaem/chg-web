@@ -19,6 +19,7 @@ export class PrecipitacionesTablaComponent {
     this.datosTabla.sort = this.sort; // Para que ordene justo despues de obtener nuevos datos
   }
   @Output() favorito = new EventEmitter<string>();
+  @Output() abrirMapa = new EventEmitter<DatosPluviometricosTrExt>();
 
   displayedColumns: string[] = ['nombrePunto', 'horaActual', 'ultimas12horas', 'acumuladoHoy', 'acumuladoAyer'];
 

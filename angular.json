@@ -31,7 +31,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/estilos/estilos.scss"
+              "src/estilos/estilos.scss",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": []
           },
@@ -102,7 +103,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/estilos/estilos.scss"
+              "src/estilos/estilos.scss",
+              "./node_modules/leaflet/dist/leaflet.css"
             ],
             "scripts": []
           }

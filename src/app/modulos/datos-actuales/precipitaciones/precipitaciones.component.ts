@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { PeticionesService, PeticionOpciones } from './../../../nucleo/servicios/peticiones/peticiones.service';
 import { DatosPluviometricosTr } from 'src/app/nucleo/interfaces/datos.models';
 import { GetDatosPluviometricosTrResp } from 'src/app/nucleo/interfaces/respuesta.models';
-import { delay } from 'rxjs';
+import { MapaPluviometricoService } from '../mapa-pluviometrico/mapa-pluviometrico.service';
+import { DatosMapaPluviometrico } from '../mapa-pluviometrico/mapa-pluviometrico.component';
 
 export interface DatosPluviometricosTrExt extends DatosPluviometricosTr {
   favorito?: boolean;
@@ -18,7 +19,7 @@ export class PrecipitacionesComponent implements OnInit {
   datosOriginales: DatosPluviometricosTrExt[] = [];
   datosFiltrados: DatosPluviometricosTrExt[] = [];
 
-  constructor(private peticionesService: PeticionesService) {}
+  constructor(private peticionesService: PeticionesService, private mpoService: MapaPluviometricoService) {}
 
   ngOnInit(): void {
     const peticionesOpciones: PeticionOpciones = {
@@ -38,5 +39,10 @@ export class PrecipitacionesComponent implements OnInit {
 
   actualizarDatosFiltrados(datosFiltrados: DatosPluviometricosTrExt[]) {
     this.datosFiltrados = datosFiltrados;
+  }
+
+  abrirMapa(estacionSeleccionada: DatosPluviometricosTrExt) {
+    const datos: DatosMapaPluviometrico = { datosPluviometricos: this.datosOriginales, centrarMapaEn: estacionSeleccionada };
+    this.mpoService.abrirMapaPluviometrico(datos);
   }
 }

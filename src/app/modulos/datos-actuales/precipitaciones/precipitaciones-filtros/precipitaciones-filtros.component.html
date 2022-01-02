@@ -20,8 +20,8 @@
                 noEntriesFoundLabel="La estación buscada no existe"
               ></ngx-mat-select-search>
             </mat-option>
-            <mat-option *ngFor="let opcion of favoritosOpciones" [value]="opcion.pluviometro.nombre">
-              ({{ opcion.provincia.codigo }}) {{ opcion.pluviometro.nombre }}
+            <mat-option *ngFor="let opcion of favoritosOpciones" [value]="opcion.pluviometro.nombreWeb">
+              ({{ opcion.provincia.codigo }}) {{ opcion.pluviometro.nombreWeb }}
             </mat-option>
           </mat-select>
         </mat-form-field>
