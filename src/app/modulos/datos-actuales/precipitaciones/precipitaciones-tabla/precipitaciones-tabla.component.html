@@ -35,13 +35,13 @@
     </ng-container>
 
     <ng-container matColumnDef="horaActual">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="boton-header-alineado-verticalmente">1h</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="boton-header-alineado-verticalmente">Hora actual</th>
       <td mat-cell *matCellDef="let e">{{ e.precipitacionesHoraActual }}</td>
     </ng-container>
 
     <ng-container matColumnDef="ultimas12horas">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header class="boton-header-alineado-verticalmente">12h</th>
-      <td mat-cell *matCellDef="let e">{{ e.precipitacionesUltimas12horas }}</td>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header class="boton-header-alineado-verticalmente">Hora anterior</th>
+      <td mat-cell *matCellDef="let e">{{ e.precipitacionesHoraAnterior }}</td>
     </ng-container>
 
     <ng-container matColumnDef="acumuladoHoy">
