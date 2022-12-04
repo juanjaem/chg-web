@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // url: 'http://localhost:3000'
-  url: 'https://chguadalquivir.herokuapp.com'
+  url: 'https://crowded-turtleneck-ox.cyclic.app'
 };
 
 /*
