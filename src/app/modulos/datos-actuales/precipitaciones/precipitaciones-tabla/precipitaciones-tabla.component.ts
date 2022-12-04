@@ -21,7 +21,7 @@ export class PrecipitacionesTablaComponent {
   @Output() favorito = new EventEmitter<string>();
   @Output() abrirMapa = new EventEmitter<DatosPluviometricosTrExt>();
 
-  displayedColumns: string[] = ['nombrePunto', 'horaActual', 'ultimas12horas', 'acumuladoHoy', 'acumuladoAyer'];
+  displayedColumns: string[] = ['nombrePunto', 'horaActual', 'horaAnterior', 'acumuladoHoy', 'acumuladoAyer'];
 
   constructor() {}
 
@@ -49,9 +49,9 @@ export class PrecipitacionesTablaComponent {
         datosOrdenados = this.ordenarPorNumero(datosOrdenados, 'precipitacionesHoraActual', orden.direction);
         datosAux = this.ordenarPorNumero(datosAux, 'precipitacionesHoraActual', orden.direction);
         break;
-      case 'ultimas12horas':
-        datosOrdenados = this.ordenarPorNumero(datosOrdenados, 'precipitacionesUltimas12horas', orden.direction);
-        datosAux = this.ordenarPorNumero(datosAux, 'precipitacionesUltimas12horas', orden.direction);
+      case 'horaAnterior':
+        datosOrdenados = this.ordenarPorNumero(datosOrdenados, 'precipitacionesHoraAnterior', orden.direction);
+        datosAux = this.ordenarPorNumero(datosAux, 'precipitacionesHoraAnterior', orden.direction);
         break;
       case 'acumuladoHoy':
         datosOrdenados = this.ordenarPorNumero(datosOrdenados, 'precipitacionesAcumuladoHoy', orden.direction);
