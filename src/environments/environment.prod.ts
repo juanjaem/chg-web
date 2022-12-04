@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'https://chguadalquivir.herokuapp.com'
+  url: 'https://crowded-turtleneck-ox.cyclic.app',
 };
