@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // url: 'http://localhost:3000'
-  url: 'https://crowded-turtleneck-ox.cyclic.app'
+  // url: 'https://crowded-turtleneck-ox.cyclic.app'
+  url: 'https://chg-server6.onrender.com'
 };
 
 /*
